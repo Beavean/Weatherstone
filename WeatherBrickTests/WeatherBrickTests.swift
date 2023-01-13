@@ -7,25 +7,54 @@ import XCTest
 @testable import WeatherBrick
 
 class WeatherBrickTests: XCTestCase {
+    // swiftlint:disable implicitly_unwrapped_optional force_cast
+    private var sut: WeatherViewController!
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        sut = (storyboard.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController)
+        sut.loadView()
+        sut.locationManager.delegate = sut
+        sut.weatherManager.delegate = sut
     }
-    
+
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        sut = nil
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testSelectedCitySaving() {
+        let inputCity = "London"
+        sut.selectedCity = inputCity
+        sut.saveSelectedCity()
+        sut = nil
+        sut = WeatherViewController()
+        sut.getSelectedCity()
+        XCTAssertEqual(inputCity, sut.selectedCity)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+
+    func testFetchWeather() {
+        sut.selectedCity = nil
+        sut.getWeather()
+        let result = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 3)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertNotNil(sut.selectedCity)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+
+    func testFetchWeatherForSelectedCity() {
+        let inputCity = "kiev"
+        let fetchedCity = "Kyiv"
+        sut.selectedCity = inputCity
+        sut.getWeather()
+        let result = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 3)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertEqual(sut.selectedCity, fetchedCity)
+        } else {
+            XCTFail("Delay interrupted")
         }
     }
 }

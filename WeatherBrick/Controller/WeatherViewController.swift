@@ -32,10 +32,11 @@ final class WeatherViewController: UIViewController {
     private let infoButtonShadowOpacity: Float = 0.2
     private let infoButtonShadowOffset = CGSize(width: 3, height: 3)
     private let infoButtonShadowRadius: CGFloat = 3
-    private var weatherManager = WeatherManager()
-    private let locationManager = CLLocationManager()
-    private var selectedCity: String? {
-        didSet { saveSelectedCity() }
+    var weatherManager = WeatherManager()
+    let locationManager = CLLocationManager()
+    var selectedCity: String? {
+        didSet {
+            saveSelectedCity() }
     }
     private enum StatusText: String {
         case updating = "Updating..."
@@ -173,8 +174,8 @@ final class WeatherViewController: UIViewController {
         weatherConditionLabel.fadeOut()
         locationLabel.text = StatusText.updating.rawValue
     }
-    
-    private func getWeather() {
+
+    func getWeather() {
         getSelectedCity()
         if let selectedCity, !selectedCity.isEmpty {
             weatherManager.fetchWeatherUsingSearch(searchQuery: selectedCity)
@@ -198,12 +199,12 @@ final class WeatherViewController: UIViewController {
         weatherConditionImageView.image = UIImage(named: condition.imageName)
     }
     
-    private func saveSelectedCity() {
+    func saveSelectedCity() {
         let defaults = UserDefaults.standard
         defaults.set(selectedCity, forKey: Constants.UserDefaults.selectedCityKey)
     }
     
-    private func getSelectedCity() {
+    func getSelectedCity() {
         let defaults = UserDefaults.standard
         guard let savedCity = defaults.object(forKey: Constants.UserDefaults.selectedCityKey) as? String else { return }
         selectedCity = savedCity

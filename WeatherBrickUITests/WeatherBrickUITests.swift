@@ -4,28 +4,57 @@
 //
 
 import XCTest
+import SnapshotTesting
+@testable import WeatherBrick
 
 class WeatherBrickUITests: XCTestCase {
+    // swiftlint:disable implicitly_unwrapped_optional
+    private var app: XCUIApplication!
+    private lazy var searchButton = app.buttons["SearchButton"]
+    private lazy var infoButton = app.buttons["InfoButton"]
+    private lazy var hideButton = app.buttons["HideButton"]
+
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
-    
+
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
         super.tearDown()
     }
-    
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testWeatherScreen() {
+        searchButton.tap()
+        app.typeText("eye")
+        let result = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 3.0)
+        if result == XCTWaiter.Result.timedOut {
+            searchButton.tap()
+            let weatherViewScreenshot = app.screenshot().image
+            assertSnapshot(matching: weatherViewScreenshot, as: .image(precision: 0.99))
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+
+    func testInfoViewShowAndHide() {
+        let mainViewScreenshot = app.screenshot().image
+        infoButton.tap()
+        let showResult = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 1.0)
+        if showResult == XCTWaiter.Result.timedOut {
+            let infoViewScreenshot = app.screenshot().image
+            assertSnapshot(matching: infoViewScreenshot, as: .image(precision: 0.99))
+        } else {
+            XCTFail("Delay interrupted")
+        }
+        hideButton.tap()
+        let hideResult = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 1.0)
+        if hideResult == XCTWaiter.Result.timedOut {
+            assertSnapshot(matching: mainViewScreenshot, as: .image(precision: 0.99))
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
 }

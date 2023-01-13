@@ -14,6 +14,7 @@ final class InfoView: UIView {
     lazy var hideButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Hide", for: .normal)
+        button.accessibilityIdentifier = "HideButton"
         button.tintColor = .darkGray
         button.layer.cornerRadius = Constants.UserInterface.baseCornerRadius
         button.layer.borderColor = UIColor.darkGray.cgColor

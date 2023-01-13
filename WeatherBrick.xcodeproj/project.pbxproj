@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		088938422971707800BE0612 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 088938412971707800BE0612 /* SnapshotTesting */; };
 		08A6C495295E54A7000A1F78 /* UIView+FadeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C494295E54A7000A1F78 /* UIView+FadeAnimation.swift */; };
 		08A6C499295E5CA0000A1F78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C498295E5CA0000A1F78 /* Constants.swift */; };
 		08C6AE3B296DD24500362910 /* MainWeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6AE3A296DD24500362910 /* MainWeatherInfo.swift */; };
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088938422971707800BE0612 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +287,7 @@
 			);
 			name = WeatherBrickUITests;
 			packageProductDependencies = (
+				088938412971707800BE0612 /* SnapshotTesting */,
 			);
 			productName = WeatherBrickUITests;
 			productReference = A3475F1A273305F400BF5E86 /* WeatherBrickUITests.xctest */;
@@ -326,6 +329,7 @@
 			);
 			mainGroup = A3475EF2273305F200BF5E86;
 			packageReferences = (
+				088938402971707800BE0612 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = A3475EFC273305F200BF5E86 /* Products */;
 			projectDirPath = "";
@@ -613,6 +617,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				INFOPLIST_FILE = WeatherBrickTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -634,6 +639,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				INFOPLIST_FILE = WeatherBrickTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -654,6 +660,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				INFOPLIST_FILE = WeatherBrickUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -674,6 +681,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				INFOPLIST_FILE = WeatherBrickUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -729,6 +737,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		088938402971707800BE0612 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		088938412971707800BE0612 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 088938402971707800BE0612 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A3475EF3273305F200BF5E86 /* Project object */;
 }

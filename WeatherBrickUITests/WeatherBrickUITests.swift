@@ -7,12 +7,13 @@ import XCTest
 import SnapshotTesting
 @testable import WeatherBrick
 
-class WeatherBrickUITests: XCTestCase {
+final class WeatherBrickUITests: XCTestCase {
     // swiftlint:disable implicitly_unwrapped_optional
     private var app: XCUIApplication!
     private lazy var searchButton = app.buttons["SearchButton"]
     private lazy var infoButton = app.buttons["InfoButton"]
     private lazy var hideButton = app.buttons["HideButton"]
+    private lazy var infoView = app.otherElements["InfoView"]
 
     override func setUp() {
         super.setUp()
@@ -44,8 +45,8 @@ class WeatherBrickUITests: XCTestCase {
         infoButton.tap()
         let showResult = XCTWaiter.wait(for: [expectation(description: #function)], timeout: 1.0)
         if showResult == XCTWaiter.Result.timedOut {
-            let infoViewScreenshot = app.screenshot().image
-            assertSnapshot(matching: infoViewScreenshot, as: .image(precision: 0.99))
+            let infoViewSnapshot = self.infoView.screenshot().image
+            assertSnapshot(matching: infoViewSnapshot, as: .image(precision: 0.99))
         } else {
             XCTFail("Delay interrupted")
         }

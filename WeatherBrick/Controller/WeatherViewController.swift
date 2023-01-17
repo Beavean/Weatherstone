@@ -32,11 +32,12 @@ final class WeatherViewController: UIViewController {
     private let infoButtonShadowOpacity: Float = 0.2
     private let infoButtonShadowOffset = CGSize(width: 3, height: 3)
     private let infoButtonShadowRadius: CGFloat = 3
-    var weatherManager = WeatherManager()
-    let locationManager = CLLocationManager()
+    private var weatherManager = WeatherManager()
+    private let locationManager = LocationManager()
     var selectedCity: String? {
         didSet {
-            saveSelectedCity() }
+            saveSelectedCity()
+        }
     }
     private enum StatusText: String {
         case updating = "Updating..."
@@ -132,8 +133,8 @@ final class WeatherViewController: UIViewController {
     private func configure() {
         prepareForUpdate()
         locationSearchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        locationManager.delegate = self
         weatherManager.delegate = self
+        locationManager.delegate = self
         getWeather()
     }
     
@@ -175,12 +176,12 @@ final class WeatherViewController: UIViewController {
         locationLabel.text = StatusText.updating.rawValue
     }
 
-    func getWeather() {
+    private func getWeather() {
         getSelectedCity()
         if let selectedCity, !selectedCity.isEmpty {
             weatherManager.fetchWeatherUsingSearch(searchQuery: selectedCity)
         } else {
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestPermission()
             locationManager.requestLocation()
         }
     }
@@ -223,20 +224,13 @@ extension WeatherViewController: UITextFieldDelegate {
 
 // MARK: - CLLocationManagerDelegate
 
-extension WeatherViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            locationManager.stopUpdatingLocation()
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            weatherManager.fetchWeatherUsingLocation(latitude: latitude, longitude: longitude)
-        }
+extension WeatherViewController: LocationManagerDelegate {
+    func failedToUpdateLocation() {
+        showError(withText: StatusText.noLocation.rawValue)
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        DispatchQueue.main.async {
-            self.showError(withText: StatusText.noLocation.rawValue)
-        }
+    func didUpdateLocationWith(coordinates: CLLocationCoordinate2D) {
+        weatherManager.fetchWeatherUsingLocation(coordinates: coordinates)
     }
 }
 

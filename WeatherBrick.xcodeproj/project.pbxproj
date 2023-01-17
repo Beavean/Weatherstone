@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0870913A2976C94C00807D39 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087091392976C94C00807D39 /* LocationManagerTests.swift */; };
+		0870913C2976D50F00807D39 /* WeatherManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870913B2976D50F00807D39 /* WeatherManagerTests.swift */; };
 		088938422971707800BE0612 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 088938412971707800BE0612 /* SnapshotTesting */; };
+		088F5BE829756149006E34E5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F5BE729756149006E34E5 /* LocationManager.swift */; };
 		08A6C495295E54A7000A1F78 /* UIView+FadeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C494295E54A7000A1F78 /* UIView+FadeAnimation.swift */; };
 		08A6C499295E5CA0000A1F78 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C498295E5CA0000A1F78 /* Constants.swift */; };
 		08C6AE3B296DD24500362910 /* MainWeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6AE3A296DD24500362910 /* MainWeatherInfo.swift */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		087091392976C94C00807D39 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
+		0870913B2976D50F00807D39 /* WeatherManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManagerTests.swift; sourceTree = "<group>"; };
+		088F5BE729756149006E34E5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		08A6C494295E54A7000A1F78 /* UIView+FadeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+FadeAnimation.swift"; sourceTree = "<group>"; };
 		08A6C498295E5CA0000A1F78 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		08C6AE3A296DD24500362910 /* MainWeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherInfo.swift; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		08893835297041FB00BE0612 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				088F5BE729756149006E34E5 /* LocationManager.swift */,
 				08C6AE42296F228D00362910 /* WeatherCondition.swift */,
 				08D0E1A1295B4C57000B01FC /* WeatherModel.swift */,
 				08D0E19E295B4C57000B01FC /* WeatherManager.swift */,
@@ -190,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				A3475F13273305F400BF5E86 /* WeatherBrickTests.swift */,
+				087091392976C94C00807D39 /* LocationManagerTests.swift */,
+				0870913B2976D50F00807D39 /* WeatherManagerTests.swift */,
 				A3475F15273305F400BF5E86 /* Info.plist */,
 			);
 			path = WeatherBrickTests;
@@ -375,6 +384,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A3ACF2E5273848AB00CEE97C /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -408,6 +418,7 @@
 				08D0E1AB295B4C57000B01FC /* WeatherViewController.swift in Sources */,
 				08C6AE43296F228D00362910 /* WeatherCondition.swift in Sources */,
 				08D0E1A9295B4C57000B01FC /* WeatherModel.swift in Sources */,
+				088F5BE829756149006E34E5 /* LocationManager.swift in Sources */,
 				08A6C499295E5CA0000A1F78 /* Constants.swift in Sources */,
 				08C6AE3B296DD24500362910 /* MainWeatherInfo.swift in Sources */,
 				08C6AE3F296DD26A00362910 /* AdditionalWeatherInfo.swift in Sources */,
@@ -419,6 +430,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3475F14273305F400BF5E86 /* WeatherBrickTests.swift in Sources */,
+				0870913A2976C94C00807D39 /* LocationManagerTests.swift in Sources */,
+				0870913C2976D50F00807D39 /* WeatherManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

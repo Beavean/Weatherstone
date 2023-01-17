@@ -39,7 +39,9 @@ struct WeatherManager {
         performRequest(with: components.url)
     }
 
-    func fetchWeatherUsingLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    func fetchWeatherUsingLocation(coordinates: CLLocationCoordinate2D) {
+        let latitude = coordinates.latitude
+        let longitude = coordinates.longitude
         var components = urlComponents
         let latitudeQuery = URLQueryItem(name: Constants.URLComponents.latitudeQueryKey, value: "\(latitude)")
         let longitudeQuery = URLQueryItem(name: Constants.URLComponents.longitudeQueryKey, value: "\(longitude)")

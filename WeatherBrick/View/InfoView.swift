@@ -68,6 +68,7 @@ final class InfoView: UIView {
     // MARK: - Helpers
     
     private func configureMainView() {
+        accessibilityIdentifier = "InfoView"
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = Constants.UserInterface.baseCornerRadius
         heightAnchor.constraint(equalToConstant: mainViewHeight).isActive = true

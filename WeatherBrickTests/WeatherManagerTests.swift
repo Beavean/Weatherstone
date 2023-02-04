@@ -14,11 +14,20 @@ final class WeatherManagerTests: XCTestCase {
     var weather: WeatherModel?
     var expectation: XCTestExpectation?
 
+    override func setUp() {
+        super.setUp()
+        expectation = expectation(description: "testWeatherManager")
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        expectation = nil
+    }
+
     func testUpdateWeatherUsingSearch() {
         var manager = WeatherManager()
         let cityName = "London"
         manager.delegate = self
-        expectation = expectation(description: #function)
         manager.fetchWeatherUsingSearch(searchQuery: "London")
         waitForExpectations(timeout: 10)
         XCTAssertEqual(cityName, weather?.cityName)
@@ -29,7 +38,6 @@ final class WeatherManagerTests: XCTestCase {
         let cityName = "Abbey Wood"
         let coordinates = CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276)
         manager.delegate = self
-        expectation = expectation(description: #function)
         manager.fetchWeatherUsingLocation(coordinates: coordinates)
         waitForExpectations(timeout: 10)
         XCTAssertEqual(cityName, weather?.cityName)
@@ -44,7 +52,6 @@ extension WeatherManagerTests: WeatherManagerDelegate {
             self.weather = weather
         }
         expectation?.fulfill()
-        expectation = nil
     }
 
     func failedToUpdateWeather() {
@@ -52,6 +59,5 @@ extension WeatherManagerTests: WeatherManagerDelegate {
             self.weather = nil
         }
         expectation?.fulfill()
-        expectation = nil
     }
 }

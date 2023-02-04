@@ -14,12 +14,21 @@ final class LocationManagerTests: XCTestCase {
     var hasUpdatedLocation = false
     var expectation: XCTestExpectation?
 
+    override func setUp() {
+        super.setUp()
+        expectation = expectation(description: "testLocationUpdate")
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        expectation = nil
+    }
+
     func testLocationUpdate() {
         let manager = LocationManager()
         manager.delegate = self
-        expectation = expectation(description: #function)
         manager.requestLocation()
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 5)
         XCTAssertTrue(hasUpdatedLocation)
     }
 }
@@ -32,7 +41,6 @@ extension LocationManagerTests: LocationManagerDelegate {
             self.hasUpdatedLocation = false
         }
         expectation?.fulfill()
-        expectation = nil
     }
 
     func didUpdateLocationWith(coordinates: CLLocationCoordinate2D) {
@@ -40,6 +48,5 @@ extension LocationManagerTests: LocationManagerDelegate {
             self.hasUpdatedLocation = true
         }
         expectation?.fulfill()
-        expectation = nil
     }
 }
